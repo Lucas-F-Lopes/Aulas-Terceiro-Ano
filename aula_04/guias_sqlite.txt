@@ -1,0 +1,16 @@
+CREATE TABLE  -> cria tabela
+INSERT        -> insere dados
+SELECT        -> busca dados
+UPDATE        -> altera dados existentes
+DELETE        -> apaga dados
+DROP TABLE    -> apaga a tabela inteira
+WHERE         -> filtra quem será afetado
+ORDER BY      -> ordena resultados
+LIMIT         -> limita quantidade
+LIKE          -> busca aproximada por texto
+UNIQUE        -> impede repetição
+commit()      -> salva alterações
+close()       -> fecha conexão
+fetchone()    -> pega um resultado
+fetchall()    -> pega todos os resultados
+rowcount      -> mostra quantas linhas foram afetadas
