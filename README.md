@@ -1,17 +1,10 @@
-# Jogo SQLite com Python
+# Aulas Terceiro Ano
 
-Projeto simples feito em Python usando SQLite.
+Aqui deixarei todas as aulas dadas ao 3º ano.
 
-## O que o projeto faz?
+## Conteúdos
 
-- Cria um banco de dados chamado jogo.db
-- Cria uma tabela de personagens
-- Permite cadastrar personagens
-- Permite listar personagens
-
-## Tecnologias usadas
-
-- Python
-- SQLite3
-- Git
-- GitHub
+- Aulas de Python
+- Banco de dados com SQLite
+- Projeto de jogo com personagens
+- Atividades práticas
