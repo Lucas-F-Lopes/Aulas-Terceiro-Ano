@@ -34,7 +34,7 @@ def listar_personagens():
             print(f'Classe: {personagem[2]}')
             print(f'Vida:  {personagem[3]}')
             print(f'Ouro: {personagem[4]}')
-            print("---------------------------------")
+            print("--------------------------------- \n")
 
     else:
         print("Nenhum personagem encontrado")
@@ -57,3 +57,27 @@ def criar_personagem():
     conexao.commit()
     conexao.close()
 
+def mostrar_menu():
+        print(""" ========== MENU DO JOGO ==========
+1 - Listar personagens 
+2 - Criar personagem 
+0 - Sair 
+=================================== """) 
+
+
+def executar_programa():
+    criar_tabela()
+    while True:
+        mostrar_menu()
+        opcao = input("Escolha uma opção: ")
+        if opcao == "1":
+            listar_personagens()
+        elif opcao == "2":
+            criar_personagem()
+        elif opcao == "0":
+            print("Saindo do jogo...")
+            break
+        else:
+            print("Opção inválida.")
+
+executar_programa()
