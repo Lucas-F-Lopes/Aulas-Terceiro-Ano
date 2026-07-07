@@ -113,6 +113,7 @@ def mostrar_menu():
 4 - Ganhar ouro
 5 - Receber dano
 6 - Mudar classe do personagem
+7 - Deletar personagem
 0 - Sair 
 =================================== """) 
 
@@ -162,6 +163,24 @@ def mudar_classe_personagem():
     conexao.commit()
     conexao.close()
 
+def deletar_personagem():
+    id_personagem = int(input("Digite o ID do personagem a ser deletado: "))
+
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+                   DELETE FROM personagens
+                   WHERE id = ?""",
+                   (id_personagem,))
+    
+    if cursor.rowcount > 0:
+        print(f"Personagem com ID {id_personagem} deletado com sucesso.")
+    else:
+        print("Personagem não encontrado.")
+
+    conexao.commit()
+    conexao.close()
 
 def executar_programa():
     criar_tabela()
@@ -180,6 +199,8 @@ def executar_programa():
             receber_dano()
         elif opcao == "6":
             mudar_classe_personagem()
+        elif opcao == "7":
+            deletar_personagem()
         elif opcao == "0":
             print("Saindo do jogo...")
             break
