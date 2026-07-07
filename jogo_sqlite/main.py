@@ -111,8 +111,35 @@ def mostrar_menu():
 2 - Criar personagem 
 3 - Buscar personagem por ID
 4 - Ganhar ouro
+5 - Receber dano
 0 - Sair 
 =================================== """) 
+
+def receber_dano():
+    id_personagem = int(input("ID do personagem: "))
+    quantidade_dano = int(input("Quanto dano ele recebeu? "))
+
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""SELECT vida FROM personagens WHERE id = ?""", (id_personagem,))
+    resultado = cursor.fetchone()
+
+    if resultado: 
+        vida_atual = resultado[0]
+        nova_vida = vida_atual - quantidade_dano 
+
+        cursor.execute("""
+        UPDATE personagens 
+        SET vida = ? 
+        WHERE id = ?
+        """, (nova_vida, id_personagem))
+        conexao.commit()
+        print(f"Dano apicado! Vida atual: {nova_vida}")
+    else:
+        print("Personagem não encontrado.")
+        conexao.close()
+
 
 
 def executar_programa():
@@ -128,6 +155,8 @@ def executar_programa():
             buscar_personagem_por_id()
         elif opcao == "4":
             ganhar_ouro()
+        elif opcao == "5":
+            receber_dano()
         elif opcao == "0":
             print("Saindo do jogo...")
             break
