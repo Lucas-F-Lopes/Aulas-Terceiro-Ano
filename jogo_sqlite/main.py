@@ -112,6 +112,7 @@ def mostrar_menu():
 3 - Buscar personagem por ID
 4 - Ganhar ouro
 5 - Receber dano
+6 - Mudar classe do personagem
 0 - Sair 
 =================================== """) 
 
@@ -140,6 +141,26 @@ def receber_dano():
         print("Personagem não encontrado.")
         conexao.close()
 
+def mudar_classe_personagem():
+    id_personagem = int(input("Digite o ID do personagem: "))
+    nova_classe = input("Digite a nova classe do personagem: ")
+
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+                   UPDATE personagens
+                   SET classe = ?
+                   WHERE id = ?""",
+                   (nova_classe, id_personagem))
+    
+    if cursor.rowcount > 0:
+        print(f"Classe do personagem com ID {id_personagem} alterada para {nova_classe}.")
+    else:
+        print("Personagem não encontrado.")
+
+    conexao.commit()
+    conexao.close()
 
 
 def executar_programa():
@@ -157,6 +178,8 @@ def executar_programa():
             ganhar_ouro()
         elif opcao == "5":
             receber_dano()
+        elif opcao == "6":
+            mudar_classe_personagem()
         elif opcao == "0":
             print("Saindo do jogo...")
             break
