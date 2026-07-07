@@ -124,23 +124,36 @@ def receber_dano():
     conexao = conectar()
     cursor = conexao.cursor()
 
-    cursor.execute("""SELECT vida FROM personagens WHERE id = ?""", (id_personagem,))
+    cursor.execute("""
+    SELECT vida FROM personagens WHERE id = ?
+    """, (id_personagem,))
+
     resultado = cursor.fetchone()
 
-    if resultado: 
+    if resultado:
         vida_atual = resultado[0]
-        nova_vida = vida_atual - quantidade_dano 
 
-        cursor.execute("""
-        UPDATE personagens 
-        SET vida = ? 
-        WHERE id = ?
-        """, (nova_vida, id_personagem))
-        conexao.commit()
-        print(f"Dano apicado! Vida atual: {nova_vida}")
+        if vida_atual == 0:
+            print("Esse personagem já está sem vida!")
+        else:
+            nova_vida = vida_atual - quantidade_dano
+
+            if nova_vida < 0:
+                nova_vida = 0
+
+            cursor.execute("""
+            UPDATE personagens
+            SET vida = ?
+            WHERE id = ?
+            """, (nova_vida, id_personagem))
+
+            conexao.commit()
+            print(f"Dano aplicado! Vida atual: {nova_vida}")
+
     else:
         print("Personagem não encontrado.")
-        conexao.close()
+
+    conexao.close()
 
 def mudar_classe_personagem():
     id_personagem = int(input("Digite o ID do personagem: "))
