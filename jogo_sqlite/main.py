@@ -114,6 +114,7 @@ def mostrar_menu():
 5 - Receber dano
 6 - Mudar classe do personagem
 7 - Deletar personagem
+8 - Ranking de ouro
 0 - Sair 
 =================================== """) 
 
@@ -195,6 +196,27 @@ def deletar_personagem():
     conexao.commit()
     conexao.close()
 
+def ranking_ouro():
+    conexao = conectar()
+    cursor = conexao.cursor()
+
+    cursor.execute("""
+                   SELECT nome, classe, ouro FROM personagens
+                   ORDER BY ouro DESC
+                   LIMIT 3""")
+    
+    ranking = cursor.fetchall()
+
+    if ranking:
+        print("\n--TOP 3 PERSONAGENS MAIS RICOS--")
+        for posicao, personagem in enumerate(ranking, start=1):
+            nome, classe, ouro = personagem
+            print(f"{posicao}º - {nome} ({classe}): {ouro} de ouro")
+    else:
+        print("Nenhum personagem encontrado.")
+
+    conexao.close()
+
 def executar_programa():
     criar_tabela()
     while True:
@@ -214,6 +236,8 @@ def executar_programa():
             mudar_classe_personagem()
         elif opcao == "7":
             deletar_personagem()
+        elif opcao == "8":
+            ranking_ouro()
         elif opcao == "0":
             print("Saindo do jogo...")
             break
