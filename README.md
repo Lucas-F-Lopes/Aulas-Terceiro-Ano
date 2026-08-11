@@ -1,6 +1,6 @@
 # Aulas Banco de Dados 
 
-Aqui deixarei todas as aulas dadas ao 3º ano referente ao banco 
+Aqui deixarei todas as aulas dadas ao 3º ano referente a Banco de Dados.
 
 ## Conteúdos
 
