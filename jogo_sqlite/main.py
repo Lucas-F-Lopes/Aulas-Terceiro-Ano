@@ -44,8 +44,8 @@ def listar_personagens():
 def criar_personagem():
     nome = input("Nome do personagem: ")
     classe = input("Classe do personagem: ")
-    vida = input("Vida do personagem: ")
-    ouro = input("Ouro do personagem: ")
+    vida = ler_numero_inteiro("Vida do personagem: ")
+    ouro = ler_numero_inteiro("Ouro do personagem: ")
 
     conexao = conectar()
     cursor = conexao.cursor()
@@ -243,5 +243,13 @@ def executar_programa():
             break
         else:
             print("Opção inválida.")
+
+def ler_numero_inteiro(mensagem):
+    while True:
+        try:
+            numero = int(input(mensagem))
+            return numero
+        except ValueError:
+            print("Por favor, digite um número inteiro válido.")
 
 executar_programa()
